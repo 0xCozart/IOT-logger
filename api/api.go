@@ -8,46 +8,52 @@ import (
 	"github.com/iotaledger/iota.go/api"
 )
 
-var endpoint = "http://node.iotadev.org:14265"
+const (
+	seed     = "CDVOPWJ9BBM9OHNRJXKINKXYANHKZIFBDQLWQBRIIFAJCEZI9YWWN9IZPKNVFERRBDRMTWPDLOAKWQCZL"
+	endpoint = "http://node.iotadev.org:14265"
+)
 
-type iotaAPI struct {
-}
+type iotaAPI struct{}
 
 // IotaAPI ...
 type IotaAPI interface {
-	IotaSender
-	IotaReceiver
-	IotaAddressCreator
-	IotaBalanceChecker
-	IotaDataSender
+	send() error
+	// IotaReceiver
+	// IotaAddressCreator
+	// IotaBalanceChecker
+	// IotaDataSender
 }
 
-// IotaSender ...
-type IotaSender interface {
-	send(api iotaAPI) error
-}
+// // IotaSender ...
+// type IotaSender interface {
+// 	send(api iotaAPI) error
+// }
 
-// IotaReceiver ...
-type IotaReceiver interface {
-	receive(api iotaAPI) (boolean error)
-}
+// // IotaReceiver ...
+// type IotaReceiver interface {
+// 	receive(api iotaAPI) (boolean error)
+// }
 
-// IotaAddressCreator ...
-type IotaAddressCreator interface {
-	createAddress(api iotaAPI) (string error)
-}
+// // IotaAddressCreator ...
+// type IotaAddressCreator interface {
+// 	createAddress(api iotaAPI) (string error)
+// }
 
-// IotaBalanceChecker ...
-type IotaBalanceChecker interface {
-	checkBalance(api iotaAPI) (string error)
-}
+// // IotaBalanceChecker ...
+// type IotaBalanceChecker interface {
+// 	checkBalance(api iotaAPI) (string error)
+// }
 
-// IotaDataSender ...
-type IotaDataSender interface {
-	send(api iotaAPI) error
-}
+// // IotaDataSender ...
+// type IotaDataSender interface {
+// 	send(api iotaAPI) error
+// }
 
-func (iota *iotaAPI) send(api iotaAPI) error {
+// type IotaTransactionCreator interface {
+// }
+
+// SendTx ...
+func (api *iotaAPI) SendTx(txInfo) error {
 
 }
 
