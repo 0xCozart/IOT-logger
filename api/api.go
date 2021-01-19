@@ -2,9 +2,10 @@ package api
 
 import (
 	"encoding/json"
-
 	"fmt"
 
+	"github.com/AlanVegaDecentralize/IOT-logger/transactions"
+	"github.com/AlanVegaDecentralize/IOT-logger/utils"
 	"github.com/iotaledger/iota.go/api"
 )
 
@@ -53,30 +54,30 @@ type IotaAPI interface {
 // }
 
 // SendTx ...
-func (api *iotaAPI) SendTx(txInfo) error {
+// func (api *iotaAPI) SendTx(txInfo) error {
 
-}
+// }
 
 // API connects to API of a IRI node on the Tangle network
 func API() {
 
 	// compose a new API instance
 	iotaAPI, err := api.ComposeAPI(api.HTTPClientSettings{URI: endpoint})
-	must(err)
+	utils.Must("api", err)
 
 	nodeInfo, err := iotaAPI.GetNodeInfo()
-	must(err)
+	utils.Must("node info", err)
 
 	pretty, err := json.MarshalIndent(nodeInfo, "", "    ")
-	must(err)
+	utils.Must("node info json", err)
 
-	fmt.Println("latest milestone index:", nodeInfo.LatestMilestoneIndex)
+	tx := transactions.TrxData{Address: "QVLOTGUOOSAFPCTZUWHNLUFGRRSZDKJGYGCTPHRZUNGYDQRWTCMMBKJUGZMTVUELQNGZEBREQ9MSXAMSYVBKHAXJDZ", Tag: "42424242",
+		Value:   0,
+		Message: "hello"}
+
+	transactions.CreateTx(tx)
+
+	// fmt.Println("latest milestone index:", nodeInfo.LatestMilestoneIndex)
 	fmt.Println(string(pretty))
-	return iotaAPI
-}
-
-func must(err error) {
-	if err != nil {
-		panic(err)
-	}
+	// return iotaAPI
 }
